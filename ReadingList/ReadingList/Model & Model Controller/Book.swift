@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+struct Book {
+    var title: String
+    var reasonToRead: String
+    var hasBeenRead: Bool
+    
+    init(title: String, reasonToRead: String, hasBeenRead: Bool = false) {
+        self.title = title
+        self.hasBeenRead = hasBeenRead
+        self.reasonToRead = reasonToRead
+    }
+}
