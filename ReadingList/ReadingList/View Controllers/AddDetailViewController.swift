@@ -9,6 +9,10 @@
 import UIKit
 
 class AddDetailViewController: UIViewController {
+    
+    var bookController: BookController?
+    
+    var book: Book?
 
     @IBOutlet weak var bookTitleTextField: UITextField!
     @IBOutlet weak var reasonToReadTextView: UITextView!
@@ -16,9 +20,19 @@ class AddDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        if let book = book {
+        bookTitleTextField.text = book.title
+        reasonToReadTextView.text = book.reasonToRead
+    }
     }
     
+
+    
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        guard let title = bookTitleTextField.text, !title.isEmpty,
+            let reason = reasonToReadTextView.text, !reason.isEmpty else {return}
+       bookController?.createBook(title, reasonToRead: reason, hasBeenRead: false)
+        bookController?.saveToPersistentStore()
+        navigationController?.popViewController(animated: true)
     }
 }
